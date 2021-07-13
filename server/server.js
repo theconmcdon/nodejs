@@ -1,27 +1,43 @@
-let path = require('path');
-let fs = require('fs');
-let request = require('request');
+const path = require('path');
+const fs = require('fs');
+const rp = require('request-promise');
+const request = require('request');
 
-let dumpPath = path.join(__dirname, '../dumps.json');
-
-let dumps = [{
-    text: 'hey'
+const chirps = [{
+    username: '@theconmcdon',
+    text: 'what up'
 },
 {
-    text: 'bored'
+    username: '@eee',
+    text: 'first post'
 },
 {
-    text: 'yep'
+    username: '@2007mcchickengirl',
+    text: 'eatin beans wtf'
 },
 {
-    text: 'fourth one'
+    username: '@toastymane',
+    text: 'yesssiir'
 },
 {
-    text: 'fifth one'
+    username: '@carrieunderwood',
+    text: 'haha'
 }]
 
-fs.writeFile(dumpPath, res.body, err => {
-    if(err) console.log(err);
+const chirpPath = path.join(__dirname, '../chirps.json');
 
-    console.log('please work')
+fs.writeFile(chirpPath, JSON.stringify(chirps), err => {
+    if (err) {console.log(err)};
+})
+
+fs.readFile(chirpPath, {
+    encoding: "UTF-8"
+}, (err, data) => {
+    JSON.parse(data).forEach(chirp => {
+        console.log('\n')
+        console.log(chirp.username)
+        console.log(chirp.text)
+    });
 });
+
+
