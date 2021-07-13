@@ -1,7 +1,6 @@
 {
   "name": "nodejs",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +10,16 @@
   "dependencies": {
     "request": "^2.88.2",
     "request-promise": "^4.2.6"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theconmcdon/nodejs.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/theconmcdon/nodejs/issues"
+  },
+  "homepage": "https://github.com/theconmcdon/nodejs#readme",
+  "description": ""
 }

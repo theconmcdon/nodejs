@@ -4,22 +4,31 @@ let request = require('request');
 let rp = require('request-promise');
 
 
-let redditPath = path.join(__dirname, '../data.json');
 
 
-request('https://reddit.com/r/popular.json', (err, res, body) => {
-    if(err) console.log(err)
+let redditPath = path.join(__dirname, '/popular-articles.json')
+let postArray = []
 
+rp('https://reddit.com/r/popular.json')
+.then((body) => {
     JSON.parse(body).data.children.forEach(item => {
-        fs.appendFileSync(redditPath,item.data.title + '\n')
+        let postTitle = item.data.title
+        let postURL = item.data.url 
+        let postAuthor = item.data.author
+        let singlePost = {
+            title: postTitle,
+            url: postURL,
+            author: postAuthor
+        }
+        postArray.push(singlePost)
+        
+    })
+    console.log(postArray)
+    fs.writeFile(redditPath, JSON.stringify(postArray), err => {
+        if (err) {console.log(err)};
+    })
+})
+.catch((err) => {
+    console.log(err)
+});
 
-    JSON.parse(body).data.children.forEach(item => {
-        fs.appendFileSync(redditPath,item.data.url + '\n')
-
-    JSON.parse(body).data.children.forEach(item => {
-        fs.appendFileSync(redditPath,item.data.author + '\n')
-    });
-
-
-//????????????????????????????????????????????????????????????????????????????
-//who wrote this lab i've been staring at this for almost three days with no idea how to do any of this
